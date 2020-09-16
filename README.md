@@ -6,4 +6,4 @@
 -  支持css继承（用的stylus，写的很随意，如有需要自行更改）
 
 ## v-model使用
-  <flex-textarea v-model="value" />
+  `<flex-textarea v-model="value" />`
