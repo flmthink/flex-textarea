@@ -55,7 +55,6 @@ export default {
   opacity 0
   display block
   width 100%
-  // white-space pre
 .field-textarea
   position absolute
   top 0
