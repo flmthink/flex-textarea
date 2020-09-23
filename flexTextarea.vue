@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     contentValue () {
-      return this.value.replace(/\n/g, '<br> ') + '<br>' // div中文字末尾加一个<br>并不能起到另起一行的作用，需要后面再添加内容，两个<br>则可以直接另起一行
+      return this.value.replace(/\n/g, '<br>') + '<br>' // div中文字末尾加一个<br>并不能起到另起一行的作用，需要后面再添加内容，两个<br>则可以直接另起一行
     }
   },
   methods: {
