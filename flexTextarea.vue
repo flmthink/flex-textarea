@@ -1,9 +1,19 @@
 <template>
   <div class="wrapper textarea-wrapper">
     <div class="content-editable"
-         contenteditable="true" v-html="contentValue"></div>
+         :style="customStyle"
+         contenteditable="true" v-text="value">
+        </div>
+    <textarea v-if="progress"
+              class="content-mask"
+              :style="customStyle"
+              readonly
+              :value="contentValueDone">
+              </textarea>
     <textarea class="field-textarea"
+              :style="customStyle"
               :placeholder="placeholder"
+              :readonly="readonly"
               :value="value"
               @input="emit2father">
               </textarea>
@@ -14,12 +24,16 @@
 export default {
   name: 'flexTextarea',
   props: {
-    placeholder: String,
-    value: String
+    value: [String, Number],
+    placeholder: [String, Number],
+    readonly: Boolean,
+    customStyle: Object,
+    progress: Boolean,
+    progressIndex: Number
   },
   computed: {
-    contentValue () {
-      return this.value.replace(/\n/g, '<br>') + '<br>' // div中文字末尾加一个<br>并不能起到另起一行的作用，需要后面再添加内容，两个<br>则可以直接另起一行
+    contentValueDone () {
+      return String(this.value).substring(0, this.progressIndex)
     }
   },
   methods: {
@@ -45,6 +59,8 @@ export default {
   text-transform inherit
   visibility inherit
   cursor inherit
+  word-break break-all
+  box-sizing border-box
 .textarea-wrapper
   position relative
   display block
@@ -55,17 +71,24 @@ export default {
   opacity 0
   display block
   width 100%
-.field-textarea
+  white-space: pre-wrap; // 与textarea默认一致
+.content-mask,.field-textarea
+  resize none
   position absolute
   top 0
   left 0
   width 100%
   height 100%
-  box-sizing border-box
   text-align left
-  resize none
   overflow hidden
+.content-mask
+  background-color transparent !important
+  z-index 1
+  pointer-events none
+  color #67C23A
+.field-textarea
   background-color transparent
 .field-textarea::-webkit-input-placeholder
   text-align left
+
 </style>
